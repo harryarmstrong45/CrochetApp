@@ -20,7 +20,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -28,26 +27,40 @@ import android.widget.EditText;
  * Activity for entering a word.
  */
 
-public class NewWordActivity extends AppCompatActivity {
+public class NewItemActivity extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY = "com.example.android.wordlistsql.REPLY";
+    public static final String EXTRA_REPLY_NAME = "com.example.android.itemlistsql.REPLY.NAME";
+    public static final String EXTRA_REPLY_DESC = "com.example.android.itemlistsql.REPLY.DESCRIPTION";
+    public static final String EXTRA_REPLY_LOC = "com.example.android.itemlistsql.REPLY.LOCATION";
 
-    private EditText mEditWordView;
+    private EditText mEditItemName, mEditItemDesc, mEditItemLoc;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_word);
-        mEditWordView = findViewById(R.id.edit_word);
+        setContentView(R.layout.activity_new_item);
+        mEditItemName = findViewById(R.id.edit_name);
+        mEditItemDesc = findViewById(R.id.edit_Description);
+        mEditItemLoc = findViewById(R.id.edit_Location);
 
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(view -> {
             Intent replyIntent = new Intent();
-            if (TextUtils.isEmpty(mEditWordView.getText())) {
+            if (TextUtils.isEmpty(mEditItemName.getText())
+                    || TextUtils.isEmpty(mEditItemDesc.getText())
+                    || TextUtils.isEmpty(mEditItemLoc.getText())) {
                 setResult(RESULT_CANCELED, replyIntent);
-            } else {
-                String word = mEditWordView.getText().toString();
-                replyIntent.putExtra(EXTRA_REPLY, word);
+            }
+
+            else {
+                String Name = mEditItemName.getText().toString();
+                String Location = mEditItemLoc.getText().toString();
+                String Description = mEditItemDesc.getText().toString();
+
+                replyIntent.putExtra(EXTRA_REPLY_NAME, Name);
+                replyIntent.putExtra(EXTRA_REPLY_DESC, Description);
+                replyIntent.putExtra(EXTRA_REPLY_LOC, Location);
+
                 setResult(RESULT_OK, replyIntent);
             }
             finish();

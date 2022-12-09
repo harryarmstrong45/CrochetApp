@@ -12,16 +12,16 @@ import java.util.List;
  * an up-to-date list of all Items.
  */
 
-public class ItemViewModel extends AndroidViewModel {
+public class MainActivityViewModel extends AndroidViewModel {
 
-    private ItemRepository mRepository;
+    private final ItemRepository mRepository;
     // Using LiveData and caching what getAlphabetizedWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
     private final LiveData<List<Item>> mAllItems;
 
-    public ItemViewModel(Application application) {
+    public MainActivityViewModel(Application application) {
         super(application);
         mRepository = new ItemRepository(application);
         mAllItems = mRepository.getAllItems();

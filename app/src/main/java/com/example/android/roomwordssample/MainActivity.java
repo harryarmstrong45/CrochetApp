@@ -22,21 +22,18 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.List;
-
-
 public class MainActivity extends AppCompatActivity {
 
+    public static final String EXTRA_REPLY_ITEM = "com.example.android.itemListSQL.REPLY.ITEM";
     public static final int NEW_Item_ACTIVITY_REQUEST_CODE = 1;
 
-    private ItemViewModel mItemViewModel;
+    private MainActivityViewModel mMainActivityViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +46,12 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // Get a new or existing ViewModel from the ViewModelProvider.
-        mItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        mMainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
 
         // Add an observer on the LiveData returned by getAlphabetizedWords.
         // The onChanged() method fires when the observed data changes and the activity is
         // in the foreground.
-        mItemViewModel.getAllItems().observe(this, Items -> {
+        mMainActivityViewModel.getAllItems().observe(this, Items -> {
             // Update the cached copy of the Items in the adapter.
             adapter.submitList(Items);
         });
@@ -64,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onClick(View view) {
-        //mItemViewModel.deleteAll(); Delete all data
+//        mItemViewModel.deleteAll(); Delete all data
+
+//        createMultipleItems(10);
 
         Intent intent = new Intent(MainActivity.this, NewItemActivity.class);
         startActivityForResult(intent, NEW_Item_ACTIVITY_REQUEST_CODE);
@@ -74,13 +73,10 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NEW_Item_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Item item = new Item(
-                    data.getStringExtra(NewItemActivity.EXTRA_REPLY_NAME),
-                    data.getStringExtra(NewItemActivity.EXTRA_REPLY_DESC),
-                    data.getStringExtra(NewItemActivity.EXTRA_REPLY_LOC)
-            );
-            mItemViewModel.insert(item);
+            Item item = (Item) data.getSerializableExtra(EXTRA_REPLY_ITEM);
+            mMainActivityViewModel.insert(item);
         }
+
         else {
             Toast.makeText(
                     getApplicationContext(),
@@ -88,4 +84,16 @@ public class MainActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         }
     }
+
+    private void createMultipleItems(int amountToCreate) {
+        for (int i = 0; i < amountToCreate; i++) {
+            String Input = String.valueOf(i);
+            Item item = new Item("Name "+ Input,
+                    "Location " + Input,
+                    "Description " + Input);
+            mMainActivityViewModel.insert(item);
+        }
+    }
 }
+
+

@@ -18,6 +18,8 @@ package com.example.android.roomwordssample;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -29,42 +31,53 @@ import android.widget.EditText;
 
 public class NewItemActivity extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY_NAME = "com.example.android.itemlistsql.REPLY.NAME";
-    public static final String EXTRA_REPLY_DESC = "com.example.android.itemlistsql.REPLY.DESCRIPTION";
-    public static final String EXTRA_REPLY_LOC = "com.example.android.itemlistsql.REPLY.LOCATION";
+    public static final String EXTRA_REPLY_ITEM = "com.example.android.itemListSQL.REPLY.ITEM";
 
     private EditText mEditItemName, mEditItemDesc, mEditItemLoc;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_new_item);
         mEditItemName = findViewById(R.id.edit_name);
         mEditItemDesc = findViewById(R.id.edit_Description);
         mEditItemLoc = findViewById(R.id.edit_Location);
 
         final Button button = findViewById(R.id.button_save);
+
         button.setOnClickListener(view -> {
             Intent replyIntent = new Intent();
-            if (TextUtils.isEmpty(mEditItemName.getText())
-                    || TextUtils.isEmpty(mEditItemDesc.getText())
-                    || TextUtils.isEmpty(mEditItemLoc.getText())) {
+
+            if (checkIfTextFieldsEmpty()) {
                 setResult(RESULT_CANCELED, replyIntent);
             }
 
             else {
-                String Name = mEditItemName.getText().toString();
-                String Location = mEditItemLoc.getText().toString();
-                String Description = mEditItemDesc.getText().toString();
+                String Name = getStringOfTextView(mEditItemName);
+                String Location = getStringOfTextView(mEditItemLoc);
+                String Description = getStringOfTextView(mEditItemDesc);
 
-                replyIntent.putExtra(EXTRA_REPLY_NAME, Name);
-                replyIntent.putExtra(EXTRA_REPLY_DESC, Description);
-                replyIntent.putExtra(EXTRA_REPLY_LOC, Location);
+                Item item = new Item(Name,Location,Description);
+
+                replyIntent.putExtra(EXTRA_REPLY_ITEM, item);
 
                 setResult(RESULT_OK, replyIntent);
             }
             finish();
         });
+    }
+
+    private String getStringOfTextView(EditText editText) {
+        return editText.getText().toString();
+    }
+
+    private boolean checkIfTextFieldsEmpty() {
+        return (
+            TextUtils.isEmpty(mEditItemName.getText())
+            || TextUtils.isEmpty(mEditItemDesc.getText())
+            || TextUtils.isEmpty(mEditItemLoc.getText())
+        );
     }
 }
 

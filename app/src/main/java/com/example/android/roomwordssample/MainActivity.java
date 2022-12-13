@@ -30,8 +30,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY_ITEM = "com.example.android.itemListSQL.REPLY.ITEM";
-    public static final int NEW_Item_ACTIVITY_REQUEST_CODE = 1;
+    public static final String EXTRA_REPLY_Crochet = "com.example.android.CrochetListSQL.REPLY.Crochet";
+    public static final int NEW_CROCHET_ACTIVITY_REQUEST_CODE = 1;
 
     private MainActivityViewModel mMainActivityViewModel;
 
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final ItemListAdapter adapter = new ItemListAdapter(new ItemListAdapter.ItemDiff());
+        final CrochetListAdapter adapter = new CrochetListAdapter(new CrochetListAdapter.CrochetDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -65,16 +65,16 @@ public class MainActivity extends AppCompatActivity {
 
 //        createMultipleItems(10);
 
-        Intent intent = new Intent(MainActivity.this, NewItemActivity.class);
-        startActivityForResult(intent, NEW_Item_ACTIVITY_REQUEST_CODE);
+        Intent intent = new Intent(MainActivity.this, NewCrochetActivity.class);
+        startActivityForResult(intent, NEW_CROCHET_ACTIVITY_REQUEST_CODE);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == NEW_Item_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            Item item = (Item) data.getSerializableExtra(EXTRA_REPLY_ITEM);
-            mMainActivityViewModel.insert(item);
+        if (requestCode == NEW_CROCHET_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+            CrochetPattern crochetPattern = (CrochetPattern) data.getSerializableExtra(EXTRA_REPLY_Crochet);
+            mMainActivityViewModel.insert(crochetPattern);
         }
 
         else {
@@ -85,11 +85,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void createMultipleItems(int amountToCreate) {
+    private void createMultipleCrochetPatterns(int amountToCreate) {
         for (int i = 0; i < amountToCreate; i++) {
             String Input = String.valueOf(i);
-            Item item = new Item("Name "+ Input,
-                    "Location " + Input,
+            CrochetPattern item = new CrochetPattern("Name "+ Input,
                     "Description " + Input);
             mMainActivityViewModel.insert(item);
         }

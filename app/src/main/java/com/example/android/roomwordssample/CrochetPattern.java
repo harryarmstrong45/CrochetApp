@@ -6,26 +6,21 @@ import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity(tableName = "item_table")
+@Entity(tableName = "crochetTable_table")
 
 
-public class Item implements Serializable {
+public class CrochetPattern implements Serializable {
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "name")
     private String mName;
 
     @NonNull
-    @ColumnInfo(name = "location")
-    private String mLocation;
-
-    @NonNull
     @ColumnInfo(name = "description")
     private String mDescription;
 
-    public Item(@NonNull String mName, @NonNull String mLocation, @NonNull String mDescription) {
+    public CrochetPattern(@NonNull String mName, @NonNull String mDescription) {
         this.mName = mName;
-        this.mLocation = mLocation;
         this.mDescription = mDescription;
     }
 
@@ -34,10 +29,6 @@ public class Item implements Serializable {
         return mName;
     }
 
-    @NonNull
-    public String getLocation() {
-        return mLocation;
-    }
 
     @NonNull
     public String getDescription() {

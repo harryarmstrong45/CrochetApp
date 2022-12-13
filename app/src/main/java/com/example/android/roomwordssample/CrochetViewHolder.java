@@ -8,29 +8,26 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class CrochetViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     private final TextView ItemViewName;
     private final TextView ItemViewDesc;
-    private final TextView ItemViewLoc;
 
-    private ItemViewHolder(View itemView) {
+    private CrochetViewHolder(View itemView) {
         super(itemView);
         ItemViewName = itemView.findViewById(R.id.textView_Name);
         ItemViewDesc = itemView.findViewById(R.id.textView_Description);
-        ItemViewLoc = itemView.findViewById(R.id.textView_location);
         itemView.setOnClickListener(this::onClick);
     }
 
-    public void bind(String textName, String textDesc, String textLoc) {
+    public void bind(String textName, String textDesc) {
         ItemViewDesc.setText(textDesc);
         ItemViewName.setText(textName);
-        ItemViewLoc.setText(textLoc);
     }
 
-    static ItemViewHolder create(ViewGroup parent) {
+    static CrochetViewHolder create(ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recyclerview_item, parent, false);
-        return new ItemViewHolder(view);
+        return new CrochetViewHolder(view);
     }
 
     @Override

@@ -11,25 +11,25 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Item.class}, version = 1, exportSchema = false)
-abstract class ItemRoomDatabase extends RoomDatabase {
+@Database(entities = {CrochetPattern.class}, version = 1, exportSchema = false)
+abstract class CrochetRoomDatabase extends RoomDatabase {
 
-    abstract ItemDao itemDao();
+    abstract CrochetDao itemDao();
 
     // marking the instance as volatile to ensure atomic access to the variable
-    private static volatile ItemRoomDatabase INSTANCE;
+    private static volatile CrochetRoomDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static ItemRoomDatabase getDatabase(final Context context) {
+    static CrochetRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (ItemRoomDatabase.class) {
+            synchronized (CrochetRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                    ItemRoomDatabase.class,
-                                    "item_database")
-                            .addCallback(sItemDatabaseCallback)
+                                    CrochetRoomDatabase.class,
+                                    "crochetTable_table")
+                            .addCallback(mCrochetDatabaseCallback)
                             .build();
                 }
             }
@@ -41,7 +41,7 @@ abstract class ItemRoomDatabase extends RoomDatabase {
      * Override the onCreate method to populate the database.
      * For this sample, we clear the database every time it is created.
      */
-    private static RoomDatabase.Callback sItemDatabaseCallback = new RoomDatabase.Callback() {
+    private static RoomDatabase.Callback mCrochetDatabaseCallback = new RoomDatabase.Callback() {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
@@ -49,12 +49,12 @@ abstract class ItemRoomDatabase extends RoomDatabase {
             databaseWriteExecutor.execute(() -> {
                 // Populate the database in the background.
                 // If you want to start with more words, just add them.
-                ItemDao dao = INSTANCE.itemDao();
+                CrochetDao dao = INSTANCE.itemDao();
                 dao.deleteAll();
 
-                Item item = new Item("Name", "location", "Description");
+                CrochetPattern item = new CrochetPattern("Name", "Description");
                 dao.insert(item);
-                item = new Item("Name 2", "location 2", "Description 2");
+                item = new CrochetPattern("Name 2", "Description 2");
                 dao.insert(item);
             });
         }

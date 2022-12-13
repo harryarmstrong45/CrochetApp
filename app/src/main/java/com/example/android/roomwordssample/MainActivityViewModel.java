@@ -14,24 +14,24 @@ import java.util.List;
 
 public class MainActivityViewModel extends AndroidViewModel {
 
-    private final ItemRepository mRepository;
+    private final CrochetRepository mRepository;
     // Using LiveData and caching what getAlphabetizedWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
-    private final LiveData<List<Item>> mAllItems;
+    private final LiveData<List<CrochetPattern>> mAllItems;
 
     public MainActivityViewModel(Application application) {
         super(application);
-        mRepository = new ItemRepository(application);
+        mRepository = new CrochetRepository(application);
         mAllItems = mRepository.getAllItems();
     }
 
-    LiveData<List<Item>> getAllItems() {
+    LiveData<List<CrochetPattern>> getAllItems() {
         return mAllItems;
     }
 
-    void insert(Item item) {
+    void insert(CrochetPattern item) {
         mRepository.insert(item);
     }
 

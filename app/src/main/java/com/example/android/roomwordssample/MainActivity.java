@@ -30,7 +30,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY_Crochet = "com.example.android.CrochetListSQL.REPLY.Crochet";
+    public static final String EXTRA_REPLY_Crochet = "com.example.android.itemListSQL.REPLY.ITEM";
     public static final int NEW_CROCHET_ACTIVITY_REQUEST_CODE = 1;
 
     private MainActivityViewModel mMainActivityViewModel;

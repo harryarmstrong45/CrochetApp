@@ -20,7 +20,7 @@ public class CrochetListAdapter extends ListAdapter<CrochetPattern, CrochetViewH
     @Override
     public void onBindViewHolder(CrochetViewHolder holder, int position) {
         CrochetPattern current = getItem(position);
-        holder.bind(current.getName(), current.getDescription());
+        holder.bind(current);
     }
 
     static class CrochetDiff extends DiffUtil.ItemCallback<CrochetPattern> {

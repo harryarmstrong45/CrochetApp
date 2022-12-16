@@ -31,9 +31,9 @@ public class MainActivityViewModel extends AndroidViewModel {
         return mAllItems;
     }
 
-    void insert(CrochetPattern item) {
-        mRepository.insert(item);
-    }
+    void insert(CrochetPattern item) {mRepository.insert(item);}
+    void update(CrochetPattern item) {mRepository.update(item);}
+
 
     void deleteAll() {
         mRepository.deleteAll();

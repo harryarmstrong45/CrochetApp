@@ -45,4 +45,11 @@ public class CrochetPattern implements Serializable {
         this.ID = ID;
     }
 
+    public void setName(@NonNull String mName) {
+        this.mName = mName;
+    }
+
+    public void setDescription(@NonNull String mDescription) {
+        this.mDescription = mDescription;
+    }
 }

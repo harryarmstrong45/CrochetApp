@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String EXTRA_REPLY_Crochet = "com.example.android.itemListSQL.REPLY.ITEM";
     public static final int NEW_CROCHET_ACTIVITY_REQUEST_CODE = 1;
+    public static final int UPDATE_CROCHET_ACTIVITY_REQUEST_CODE = 2;
 
     private MainActivityViewModel mMainActivityViewModel;
 
@@ -71,18 +72,34 @@ public class MainActivity extends AppCompatActivity {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        CrochetPattern crochetPattern = (CrochetPattern) data.getSerializableExtra(EXTRA_REPLY_Crochet);
+        System.out.println(crochetPattern.getName());
+        System.out.println(requestCode);
+        if(resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case NEW_CROCHET_ACTIVITY_REQUEST_CODE:
 
-        if (requestCode == NEW_CROCHET_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-            CrochetPattern crochetPattern = (CrochetPattern) data.getSerializableExtra(EXTRA_REPLY_Crochet);
-            mMainActivityViewModel.insert(crochetPattern);
+                    mMainActivityViewModel.insert(crochetPattern);
+                    break;
+                case UPDATE_CROCHET_ACTIVITY_REQUEST_CODE:
+
+                    mMainActivityViewModel.update(crochetPattern);
+                    break;
+            }
         }
 
-        else {
-            Toast.makeText(
-                    getApplicationContext(),
-                    R.string.empty_not_saved,
-                    Toast.LENGTH_LONG).show();
-        }
+//        if (requestCode == NEW_CROCHET_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+//            CrochetPattern crochetPattern = (CrochetPattern) data.getSerializableExtra(EXTRA_REPLY_Crochet);
+//            mMainActivityViewModel.insert(crochetPattern);
+//        }
+//
+//
+//        else {
+//            Toast.makeText(
+//                    getApplicationContext(),
+//                    R.string.empty_not_saved,
+//                    Toast.LENGTH_LONG).show();
+//        }
     }
 
     private void createMultipleCrochetPatterns(int amountToCreate) {

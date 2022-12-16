@@ -34,6 +34,12 @@ public class CrochetRepository {
         });
     }
 
+    void update(CrochetPattern crochetpattern) {
+        CrochetRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mCrochetDao.update(crochetpattern);
+        });
+    }
+
     void deleteAll() {
         CrochetRoomDatabase.databaseWriteExecutor.execute(() -> {
             mCrochetDao.deleteAll();

@@ -1,5 +1,7 @@
 package com.example.android.roomwordssample;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CrochetViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
     private final TextView ItemViewName;
     private final TextView ItemViewDesc;
+    private CrochetPattern CrochetCurrent;
+    public static final String ITEM_TO_UPDATE = "Update Item";
+
 
     private CrochetViewHolder(View itemView) {
         super(itemView);
@@ -19,9 +24,10 @@ public class CrochetViewHolder extends RecyclerView.ViewHolder implements View.O
         itemView.setOnClickListener(this::onClick);
     }
 
-    public void bind(String textName, String textDesc) {
-        ItemViewDesc.setText(textDesc);
-        ItemViewName.setText(textName);
+    public void bind(CrochetPattern crochetPattern) {
+        ItemViewDesc.setText(crochetPattern.getDescription());
+        ItemViewName.setText(crochetPattern.getName());
+        CrochetCurrent=crochetPattern;
     }
 
     static CrochetViewHolder create(ViewGroup parent) {
@@ -32,11 +38,8 @@ public class CrochetViewHolder extends RecyclerView.ViewHolder implements View.O
 
     @Override
     public void onClick(View view) {
-        int mPosition = getLayoutPosition() + 1;
-        Toast.makeText(
-                view.getContext(),
-                 "You Selected: " + mPosition,
-                Toast.LENGTH_SHORT
-        ).show();
+        Intent intent = new Intent(view.getContext(), EditCrochetActivity.class);
+        intent.putExtra(ITEM_TO_UPDATE, CrochetCurrent);
+        ((Activity) view.getContext()).startActivityForResult(intent,2);
     }
 }

@@ -10,7 +10,11 @@ import java.io.Serializable;
 
 
 public class CrochetPattern implements Serializable {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    @ColumnInfo(name = "ID")
+    private int ID;
+
     @NonNull
     @ColumnInfo(name = "name")
     private String mName;
@@ -19,7 +23,7 @@ public class CrochetPattern implements Serializable {
     @ColumnInfo(name = "description")
     private String mDescription;
 
-    public CrochetPattern(@NonNull String mName, @NonNull String mDescription) {
+    public CrochetPattern( @NonNull String mName, @NonNull String mDescription) {
         this.mName = mName;
         this.mDescription = mDescription;
     }
@@ -29,9 +33,16 @@ public class CrochetPattern implements Serializable {
         return mName;
     }
 
-
     @NonNull
     public String getDescription() {
         return mDescription;
     }
+
+    @NonNull
+    public int getID() {return ID;}
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
 }

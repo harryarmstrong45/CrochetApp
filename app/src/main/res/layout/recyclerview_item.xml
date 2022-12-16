@@ -49,7 +49,7 @@ limitations under the License. -->
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView_Description"
+                android:id="@+id/textView_Name"
                 style="@style/word_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -57,12 +57,13 @@ limitations under the License. -->
                 android:background="#00FFFFFF" />
 
             <TextView
-                android:id="@+id/textView_Name"
+                android:id="@+id/textView_Description"
                 style="@style/word_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="0dp"
                 android:background="#00FFFFFF" />
+
         </LinearLayout>
     </RelativeLayout>
 

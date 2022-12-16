@@ -25,8 +25,8 @@ public class CrochetViewHolder extends RecyclerView.ViewHolder implements View.O
     }
 
     public void bind(CrochetPattern crochetPattern) {
-        ItemViewDesc.setText(crochetPattern.getDescription());
         ItemViewName.setText(crochetPattern.getName());
+        ItemViewDesc.setText(crochetPattern.getDescription());
         CrochetCurrent=crochetPattern;
     }
 

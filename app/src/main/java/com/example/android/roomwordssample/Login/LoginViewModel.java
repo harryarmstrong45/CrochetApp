@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 import android.util.Patterns;
 
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -14,7 +15,7 @@ import com.example.android.roomwordssample.R;
 
 import java.util.List;
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends AndroidViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
 
@@ -24,6 +25,10 @@ public class LoginViewModel extends ViewModel {
     //   the UI when the data actually changes.
     // - Repository is completely separated from the UI through the ViewModel.
     private final LiveData<List<Login>> mAllItems;
+
+    LiveData<LoginFormState> getLogInFormState() {
+        return loginFormState;
+    }
 
     public LoginViewModel(Application application) {
         super(application);

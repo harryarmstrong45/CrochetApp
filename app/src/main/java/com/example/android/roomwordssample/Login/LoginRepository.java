@@ -50,4 +50,5 @@ public class LoginRepository {
             loginDAO.deleteAll();
         });
     }
+
 }

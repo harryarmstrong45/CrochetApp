@@ -1,6 +1,7 @@
 package com.example.android.roomwordssample.Login;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -10,6 +11,7 @@ import com.example.android.roomwordssample.CrochetPattern;
 
 import java.util.List;
 
+@Dao
 public interface LoginDAO {
     @Query("SELECT * FROM login_table ORDER BY Username ASC")
     LiveData<List<Login>> getAlphabetizedItems();

@@ -1,16 +1,12 @@
 package com.example.android.roomwordssample.Login;
 
 import android.app.Application;
-import android.util.Log;
 import android.util.Patterns;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.android.roomwordssample.CrochetPattern;
-import com.example.android.roomwordssample.CrochetRepository;
 import com.example.android.roomwordssample.R;
 
 import java.util.List;
@@ -18,17 +14,36 @@ import java.util.List;
 public class LoginViewModel extends AndroidViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
+    private MutableLiveData<LogInResult> loginResult = new MutableLiveData<>();
 
     private final LoginRepository mRepository;
-    // Using LiveData and caching what getAlphabetizedWords returns has several benefits:
-    // - We can put an observer on the data (instead of polling for changes) and only update the
-    //   the UI when the data actually changes.
-    // - Repository is completely separated from the UI through the ViewModel.
+
     private final LiveData<List<Login>> mAllItems;
+
+    LiveData<LogInResult> getLoginResult() {
+        return loginResult;
+    }
 
     LiveData<LoginFormState> getLogInFormState() {
         return loginFormState;
     }
+
+
+    public void login(String username, String password) {
+         //can be launched in a separate asynchronous job
+//        Result<LoggedInUser> result = mRepository.login(username, password);
+//
+//        if (result instanceof Result.Success) {
+//            LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
+//            loginResult.setValue(new LoginResult(new LoggedInUserView(data.getDisplayName())));
+//        } else {
+//            loginResult.setValue(new LoginResult(R.string.login_failed));
+//        }
+
+        Login login = new Login(username,password);
+        insert(login);
+    }
+
 
     public LoginViewModel(Application application) {
         super(application);

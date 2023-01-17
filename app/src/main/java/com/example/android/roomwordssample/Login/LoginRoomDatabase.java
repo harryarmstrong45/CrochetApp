@@ -28,6 +28,7 @@ abstract public class LoginRoomDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                                     LoginRoomDatabase.class,
                                     "login_table")
+                            .allowMainThreadQueries()
                             .addCallback(mCrochetDatabaseCallback)
                             .build();
                 }

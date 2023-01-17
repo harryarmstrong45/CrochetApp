@@ -28,6 +28,10 @@ public class LoginViewModel extends AndroidViewModel {
         return loginFormState;
     }
 
+    int hasItem(String username, String password) {
+        return mRepository.hasItem(username, password);
+    }
+
 
     public void login(String username, String password) {
          //can be launched in a separate asynchronous job
@@ -40,8 +44,17 @@ public class LoginViewModel extends AndroidViewModel {
 //            loginResult.setValue(new LoginResult(R.string.login_failed));
 //        }
 
-        Login login = new Login(username,password);
-        insert(login);
+        if (hasItem(username,password) == 1) {
+            System.out.println("User");
+            loginResult.setValue(new LogInResult(new LoggedInUserView(username)));
+        } else {
+           System.out.println("NoUser");
+           loginResult.setValue(new LogInResult(R.string.user_created));
+           Login login = new Login(username,password);
+           insert(login);
+        }
+
+
     }
 
 

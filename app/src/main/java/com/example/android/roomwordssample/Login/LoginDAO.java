@@ -24,4 +24,8 @@ public interface LoginDAO {
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     void update(Login login);
+
+    @Query("SELECT EXISTS(SELECT * FROM login_table WHERE Username = :username AND Password = :password)")
+    int hasItem(String username, String password);
+    
 }

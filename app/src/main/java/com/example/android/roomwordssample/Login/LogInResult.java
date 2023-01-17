@@ -8,13 +8,13 @@ public class LogInResult {
     @Nullable
     private Integer error;
 
-//    LoginResult(@Nullable Integer error) {
-//        this.error = error;
-//    }
-//
-//    LoginResult(@Nullable LoggedInUserView success) {
-//        this.success = success;
-//    }
+    LogInResult(@Nullable Integer error) {
+        this.error = error;
+    }
+
+    LogInResult(@Nullable LoggedInUserView success) {
+        this.success = success;
+    }
 
     @Nullable
     LoggedInUserView getSuccess() {

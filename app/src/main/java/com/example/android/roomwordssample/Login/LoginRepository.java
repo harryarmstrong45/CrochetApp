@@ -51,4 +51,7 @@ public class LoginRepository {
         });
     }
 
+    int hasItem(String username, String password){
+        return loginDAO.hasItem(username,password);
+    }
 }

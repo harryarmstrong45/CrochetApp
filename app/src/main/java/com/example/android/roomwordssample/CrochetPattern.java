@@ -23,9 +23,14 @@ public class CrochetPattern implements Serializable {
     @ColumnInfo(name = "description")
     private String mDescription;
 
-    public CrochetPattern( @NonNull String mName, @NonNull String mDescription) {
+
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB, name = "image")
+    private byte[] mImage;
+
+    public CrochetPattern( @NonNull String mName, @NonNull String mDescription, @NonNull byte[] mImage) {
         this.mName = mName;
         this.mDescription = mDescription;
+        this.mImage = mImage;
     }
 
     @NonNull
@@ -52,4 +57,13 @@ public class CrochetPattern implements Serializable {
     public void setDescription(@NonNull String mDescription) {
         this.mDescription = mDescription;
     }
+
+    public byte[] getImage() {
+        return mImage;
+    }
+
+    public void setImage(byte[] mImage) {
+        this.mImage = mImage;
+    }
+
 }

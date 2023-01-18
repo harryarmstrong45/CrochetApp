@@ -52,10 +52,10 @@ abstract class CrochetRoomDatabase extends RoomDatabase {
                 CrochetDao dao = INSTANCE.itemDao();
                 dao.deleteAll();
 
-                CrochetPattern item = new CrochetPattern("Name", "Description");
-                dao.insert(item);
-                item = new CrochetPattern("Name 2", "Description 2");
-                dao.insert(item);
+//                CrochetPattern item = new CrochetPattern("Name", "Description");
+//                dao.insert(item);
+//                item = new CrochetPattern("Name 2", "Description 2");
+//                dao.insert(item);
             });
         }
     };

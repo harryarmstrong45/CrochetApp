@@ -2,9 +2,11 @@ package com.example.android.roomwordssample;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,12 +17,14 @@ public class CrochetViewHolder extends RecyclerView.ViewHolder implements View.O
     private final TextView ItemViewDesc;
     private CrochetPattern CrochetCurrent;
     public static final String ITEM_TO_UPDATE = "Update Item";
+    private final ImageView Crochet_Image;
 
 
     private CrochetViewHolder(View itemView) {
         super(itemView);
         ItemViewName = itemView.findViewById(R.id.textView_Name);
         ItemViewDesc = itemView.findViewById(R.id.textView_Description);
+        Crochet_Image = itemView.findViewById(R.id.imageView3);
         itemView.setOnClickListener(this::onClick);
     }
 
@@ -28,6 +32,8 @@ public class CrochetViewHolder extends RecyclerView.ViewHolder implements View.O
         ItemViewName.setText(crochetPattern.getName());
         ItemViewDesc.setText(crochetPattern.getDescription());
         CrochetCurrent=crochetPattern;
+
+        Crochet_Image.setImageBitmap(BitmapFactory.decodeByteArray(crochetPattern.getImage(),0, crochetPattern.getImage().length));
     }
 
     static CrochetViewHolder create(ViewGroup parent) {

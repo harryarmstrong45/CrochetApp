@@ -17,6 +17,7 @@ public class CrochetViewHolder extends RecyclerView.ViewHolder implements View.O
     private final TextView ItemViewDesc;
     private CrochetPattern CrochetCurrent;
     public static final String ITEM_TO_UPDATE = "Update Item";
+    public static final String ITEM_TO_DELETE = "Delete_Item";
     private final ImageView Crochet_Image;
 
 
@@ -26,6 +27,16 @@ public class CrochetViewHolder extends RecyclerView.ViewHolder implements View.O
         ItemViewDesc = itemView.findViewById(R.id.textView_Description);
         Crochet_Image = itemView.findViewById(R.id.imageView3);
         itemView.setOnClickListener(this::onClick);
+        itemView.setOnLongClickListener(getOnLongClickListener());
+    }
+
+    private View.OnLongClickListener getOnLongClickListener() {
+        return view -> {
+            Intent intent = new Intent(view.getContext(), delete_activity.class);
+            intent.putExtra(ITEM_TO_DELETE, CrochetCurrent);
+            ((Activity) view.getContext()).startActivityForResult(intent,3);
+            return false;
+        };
     }
 
     public void bind(CrochetPattern crochetPattern) {

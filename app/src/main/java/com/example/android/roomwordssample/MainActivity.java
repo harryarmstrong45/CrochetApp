@@ -31,9 +31,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY_Crochet = "com.example.android.itemListSQL.REPLY.ITEM";
+    public static final String EXTRA_REPLY_Crochet = "REPLY.ITEM";
     public static final int NEW_CROCHET_ACTIVITY_REQUEST_CODE = 1;
     public static final int UPDATE_CROCHET_ACTIVITY_REQUEST_CODE = 2;
+    public static final int DELETE_CROCHET_ACTIVITY_REQUEST_CODE = 3;
+
+
 
     private MainActivityViewModel mMainActivityViewModel;
 
@@ -76,18 +79,20 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         CrochetPattern crochetPattern = (CrochetPattern) data.getSerializableExtra(EXTRA_REPLY_Crochet);
-        System.out.println(crochetPattern.getName());
+        //System.out.println(crochetPattern.getName());
         System.out.println(requestCode);
         if(resultCode == RESULT_OK) {
             switch (requestCode) {
                 case NEW_CROCHET_ACTIVITY_REQUEST_CODE:
-
                     mMainActivityViewModel.insert(crochetPattern);
                     break;
-                case UPDATE_CROCHET_ACTIVITY_REQUEST_CODE:
 
+                case UPDATE_CROCHET_ACTIVITY_REQUEST_CODE:
                     mMainActivityViewModel.update(crochetPattern);
                     break;
+
+                case DELETE_CROCHET_ACTIVITY_REQUEST_CODE:
+                    mMainActivityViewModel.delete(crochetPattern);
             }
         }
 

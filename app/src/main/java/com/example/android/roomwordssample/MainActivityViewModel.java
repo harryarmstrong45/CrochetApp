@@ -38,4 +38,8 @@ public class MainActivityViewModel extends AndroidViewModel {
     void deleteAll() {
         mRepository.deleteAll();
     }
+
+    public void delete(CrochetPattern crochetPattern) {
+        mRepository.delete(crochetPattern);
+    }
 }

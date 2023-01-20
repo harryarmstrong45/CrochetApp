@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 public class EditCrochetActivity extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY_CROCHET = "com.example.android.itemListSQL.REPLY.ITEM";
+    public static final String EXTRA_REPLY_CROCHET = "REPLY.ITEM";
     public static final String ITEM_TO_UPDATE = "Update Item";
     private CrochetPattern oldPattern;
 

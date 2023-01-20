@@ -39,7 +39,7 @@ import java.io.InputStream;
 
 public class NewCrochetActivity extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY_CROCHET = "com.example.android.itemListSQL.REPLY.ITEM";
+    public static final String EXTRA_REPLY_CROCHET = "REPLY.ITEM";
 
     private EditText mEditItemName, mEditItemDesc;
 

@@ -82,9 +82,9 @@ public class CrochetDaoTest {
 
     @Test
     public void deleteAll() throws Exception {
-        CrochetPattern word = new CrochetPattern("word", "ccc", null);
+        CrochetPattern word = new CrochetPattern("ccc", "ccc", null);
         mWordDao.insert(word);
-        CrochetPattern word2 = new CrochetPattern("word2", "ddd", null);
+        CrochetPattern word2 = new CrochetPattern("ddd", "ddd", null);
         mWordDao.insert(word2);
         mWordDao.deleteAll();
         List<CrochetPattern> allWords = LiveDataTestUtil.getValue(mWordDao.getAlphabetizedItems());

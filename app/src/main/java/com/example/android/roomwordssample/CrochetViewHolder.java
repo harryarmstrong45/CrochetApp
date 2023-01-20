@@ -44,7 +44,16 @@ public class CrochetViewHolder extends RecyclerView.ViewHolder implements View.O
         ItemViewDesc.setText(crochetPattern.getDescription());
         CrochetCurrent=crochetPattern;
 
-        Crochet_Image.setImageBitmap(BitmapFactory.decodeByteArray(crochetPattern.getImage(),0, crochetPattern.getImage().length));
+        try {
+            Crochet_Image.setImageBitmap(BitmapFactory.decodeByteArray(
+                    crochetPattern.getImage(),
+                    0,
+                    crochetPattern.getImage().length));
+        } catch (Exception e) {
+            Crochet_Image.setImageBitmap(null);
+        }
+
+
     }
 
     static CrochetViewHolder create(ViewGroup parent) {

@@ -52,8 +52,6 @@ public class CrochetViewHolder extends RecyclerView.ViewHolder implements View.O
         } catch (Exception e) {
             Crochet_Image.setImageBitmap(null);
         }
-
-
     }
 
     static CrochetViewHolder create(ViewGroup parent) {

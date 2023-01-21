@@ -33,6 +33,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+//All espresso tests are run on an emulated Pixel 6 Pro on Android R (Android 11)
+//on API 30
+
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class AddPatternTest {

@@ -4,6 +4,7 @@ package com.example.android.roomwordssample.EspressoTests;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.longClick;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
@@ -36,19 +37,16 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-//All espresso tests are run on an emulated Pixel 6 Pro on Android R (Android 11)
-//on API 30
-
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class EditPatternTest {
+public class CancelButtonTest {
 
     @Rule
     public ActivityScenarioRule<UserLoginActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(UserLoginActivity.class);
 
     @Test
-    public void editPatternTest() {
+    public void cancelButtonTest() {
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.username),
                         childAtPosition(
@@ -58,7 +56,7 @@ public class EditPatternTest {
                                                 0)),
                                 0),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("Harry"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("Harry1"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
                 allOf(withId(R.id.password),
@@ -69,7 +67,7 @@ public class EditPatternTest {
                                                 0)),
                                 1),
                         isDisplayed()));
-        appCompatEditText2.perform(replaceText("harry1234"), closeSoftKeyboard());
+        appCompatEditText2.perform(replaceText("Harry1234"), closeSoftKeyboard());
 
         ViewInteraction materialButton = onView(
                 allOf(withId(R.id.login), withText("Sign in or register"),
@@ -127,50 +125,10 @@ public class EditPatternTest {
                         childAtPosition(
                                 withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
                                 0)));
-        recyclerView.perform(actionOnItemAtPosition(0, click()));
-
-        ViewInteraction appCompatEditText5 = onView(
-                allOf(withId(R.id.edit_name), withText("Pattern 1"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatEditText5.perform(replaceText("Pattern 2"));
-
-        ViewInteraction appCompatEditText6 = onView(
-                allOf(withId(R.id.edit_name), withText("Pattern 2"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatEditText6.perform(closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText7 = onView(
-                allOf(withId(R.id.edit_Description), withText("New Pattern"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatEditText7.perform(replaceText("Newer Pattern"));
-
-        ViewInteraction appCompatEditText8 = onView(
-                allOf(withId(R.id.edit_Description), withText("Newer Pattern"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        appCompatEditText8.perform(closeSoftKeyboard());
+        recyclerView.perform(actionOnItemAtPosition(0, longClick()));
 
         ViewInteraction materialButton3 = onView(
-                allOf(withId(R.id.button_save), withText("Save"),
+                allOf(withId(R.id.button_cancel), withText("Cancel"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
@@ -179,11 +137,10 @@ public class EditPatternTest {
                         isDisplayed()));
         materialButton3.perform(click());
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.textView_Name), withText("Pattern 2"),
-                        withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class))),
+        ViewInteraction linearLayout = onView(
+                allOf(withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class))),
                         isDisplayed()));
-        textView.check(matches(withText("Pattern 2")));
+        linearLayout.check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
